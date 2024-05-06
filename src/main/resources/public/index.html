@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		#aa {
+			color: blue;
+			margin-right: 50px;
+		}
+
+		.bb {
+			color: yellow;
+		}
+
+		.bb {
+			color: pink;
+		}
+		.cc{
+			display: flex;
+		}
+	</style>
+	<script
+	src="https://code.jquery.com/jquery-3.7.1.js"
+	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+
+	<div class="cc">
+		<div id="aa" class="bb">123</div>
+		<div class="bb">123</div>
+	</div>
+<div id="kk"></div>
+<script>
+	var zz=document.getElementById("aa")
+	console.log(zz)
+	zz.addEventListener("click", function() {
+  // 使用 fetch 函式進行 GET 請求
+fetch('/test/a')
+  .then(response => {
+    // 檢查響應是否成功
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    // 解析 JSON 格式的響應
+    return response.text();
+  })
+  .then(data => {
+    // 在此處處理從服務器返回的數據
+    console.log(data);
+	var kk=document.getElementById("kk")
+	kk.textContent = data
+  })
+  .catch(error => {
+    // 處理錯誤情況
+    console.error('There was a problem with the fetch operation:', error);
+  });
+});
+$(".bb").click(function(){
+	$.ajax({
+  url: '/test/a',
+  method: 'GET',
+  success: function(data) {
+    // 處理成功響應
+    $("#kk").text(data)
+  },
+  error: function(xhr, status, error) {
+    // 處理錯誤情況
+    console.error('There was a problem with the AJAX request:', error);
+  }
+});
+})
+</script>
+</body>
+
+</html>
